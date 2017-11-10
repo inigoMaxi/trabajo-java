@@ -1,4 +1,5 @@
 package modelo;
+
 import java.sql.Date;
 
 import java.util.*;
@@ -8,70 +9,104 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tarjeta")
+@Table(name = "tarjeta")
 public class Tarjeta {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@Column(name = "tarjeta_id")
+	private Long id;
 	@Column(name = "nombre")
-	protected String nombre;
+	private String nombre;
 	@Column(name = "fechaAsignacion")
-	protected Date fechaAsignacion;
+	private Date fechaAsignacion;
 	@Column(name = "fechaVencimiento")
-	protected Date fechaVencimiento;
+	private Date fechaVencimiento;
 	@Column(name = "comentarios")
-	protected ArrayList<Comentario> comentarios;
+	@OneToMany
+	private List<Comentario> comentarios;
 	@Column(name = "items")
-	protected ArrayList<Item> items;
+	@OneToMany
+	private List<Item> items;
 	@Column(name = "usuarios")
-	protected ArrayList<Usuario> usuarios ;
-	
+	@ManyToMany(mappedBy = "tarjetas")
+	private List<Usuario> usuarios;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public Date getFechaAsignacion() {
 		return fechaAsignacion;
 	}
+
 	public void setFechaAsignacion(Date fechaAsignacion) {
 		this.fechaAsignacion = fechaAsignacion;
 	}
+
 	public Date getFechaVencimiento() {
 		return fechaVencimiento;
 	}
+
 	public void setFechaVencimiento(Date fechaVencimiento) {
 		this.fechaVencimiento = fechaVencimiento;
 	}
+
 	public List<Comentario> getComentarios() {
 		return comentarios;
 	}
-	public void setComentarios(ArrayList<Comentario> comentarios) {
+
+	public void setComentarios(List<Comentario> comentarios) {
 		this.comentarios = comentarios;
 	}
-	public ArrayList<Item> getItems() {
+
+	public List<Item> getItems() {
 		return items;
 	}
-	public void setItems(ArrayList<Item> items) {
+
+	public void setItems(List<Item> items) {
 		this.items = items;
 	}
-	public ArrayList<Usuario> getUsuarios() {
+
+	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
-	public void setUsuarios(ArrayList<Usuario> usuarios) {
+
+	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
+
 	public Tarjeta() {
 
 	}
-	
-	
-	
+
+	public Tarjeta(Long id, String nombre, Date fechaAsignacion, Date fechaVencimiento, List<Comentario> comentarios,
+			List<Item> items, List<Usuario> usuarios) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.fechaAsignacion = fechaAsignacion;
+		this.fechaVencimiento = fechaVencimiento;
+		this.comentarios = comentarios;
+		this.items = items;
+		this.usuarios = usuarios;
+	}
 
 }

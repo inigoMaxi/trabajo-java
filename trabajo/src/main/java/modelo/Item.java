@@ -8,41 +8,62 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="item")
+@Table(name = "item")
 public class Item {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@Column(name = "item_id")
+	private Long id;
 	@Column(name = "titulo")
-	protected String titulo;
+	private String titulo;
 	@Column(name = "descripcion")
-	protected String descripcion;
+	private String descripcion;
 	@Column(name = "estado")
-	protected Boolean estado;
-	
+	private Boolean estado;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getTitulo() {
 		return titulo;
 	}
+
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
+
 	public String getDescripcion() {
 		return descripcion;
 	}
+
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
 	public Boolean getEstado() {
 		return estado;
 	}
+
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
+
 	public Item() {
-		
+
 	}
-	
-	
+
+	public Item(Long id, String titulo, String descripcion, Boolean estado) {
+		super();
+		this.id = id;
+		this.titulo = titulo;
+		this.descripcion = descripcion;
+		this.estado = estado;
+	}
 
 }
