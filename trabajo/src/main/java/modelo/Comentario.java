@@ -1,6 +1,8 @@
 package modelo;
 
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,9 +52,8 @@ public class Comentario {
 		
 	}
 
-	public Comentario(Long id, Date fechaHora, String texto) {
+	public Comentario( Date fechaHora, String texto) {
 		super();
-		this.id = id;
 		this.fechaHora = fechaHora;
 		this.texto = texto;
 	}

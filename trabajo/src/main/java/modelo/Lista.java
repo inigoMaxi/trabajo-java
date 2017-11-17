@@ -53,11 +53,10 @@ public class Lista {
 
 	}
 
-	public Lista(Long id, String nombre, List<Tarjeta> tarjetas) {
+	public Lista(String nombre) {
 		super();
-		this.id = id;
 		this.nombre = nombre;
-		this.tarjetas = tarjetas;
+
 	}
 
 }

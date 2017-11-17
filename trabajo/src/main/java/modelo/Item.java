@@ -58,9 +58,9 @@ public class Item {
 
 	}
 
-	public Item(Long id, String titulo, String descripcion, Boolean estado) {
+	public Item( String titulo, String descripcion, Boolean estado) {
 		super();
-		this.id = id;
+		
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.estado = estado;

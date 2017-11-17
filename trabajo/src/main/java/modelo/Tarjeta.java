@@ -1,6 +1,6 @@
 package modelo;
 
-import java.sql.Date;
+
 
 import java.util.*;
 
@@ -97,16 +97,13 @@ public class Tarjeta {
 
 	}
 
-	public Tarjeta(Long id, String nombre, Date fechaAsignacion, Date fechaVencimiento, List<Comentario> comentarios,
-			List<Item> items, List<Usuario> usuarios) {
+	public Tarjeta( String nombre, Date fechaAsignacion, Date fechaVencimiento) {
 		super();
-		this.id = id;
+		
 		this.nombre = nombre;
 		this.fechaAsignacion = fechaAsignacion;
 		this.fechaVencimiento = fechaVencimiento;
-		this.comentarios = comentarios;
-		this.items = items;
-		this.usuarios = usuarios;
+		
 	}
 
 }
