@@ -3,7 +3,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ttps</groupId>
 	<artifactId>trabajo</artifactId>
-	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>trabajo Maven Webapp</name>
 	<url>http://maven.apache.org</url>
@@ -33,4 +32,5 @@
 	<build>
 		<finalName>trabajo</finalName>
 	</build>
+	<packaging>pom</packaging>
 </project>
