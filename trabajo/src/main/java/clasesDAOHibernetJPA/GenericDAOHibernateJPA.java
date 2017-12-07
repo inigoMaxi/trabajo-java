@@ -1,22 +1,51 @@
 package clasesDAOHibernetJPA;
 
 import java.io.Serializable;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
+
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import clasesDAO.EMF;
 import clasesDAO.GenericDAO;
 
+
+@EnableTransactionManagement
 public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	
-	protected Class<T> persistentClass;
+	EntityManager entityManager;
+
+	@PersistenceContext(type=PersistenceContextType.EXTENDED)
+	public void setEntityManager(EntityManager em) {
+		this.entityManager = em;
+	}
+
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly=false)
+	public T persistir(T entity) {
+		//this.getEntityManager().persist(entity);
+		this.getEntityManager().merge(entity);
+		return entity;
+	}
 	
-	public GenericDAOHibernateJPA(Class<T> c){
-		this.persistentClass=c;
-		
+	
+
+	protected Class<T> persistentClass;
+
+	public GenericDAOHibernateJPA(Class<T> class1) {
+		persistentClass = class1;
 	}
 
 	public T actualizar(T entity) {
@@ -65,23 +94,8 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 		return entity != null;
 	} 
 
-	public T persistir(T entity) {
-		EntityManager em = EMF.getEMF().createEntityManager();
-		EntityTransaction tx = null;
-		try {
-			tx = em.getTransaction();
-			tx.begin();
-			em.persist(entity);
-			tx.commit();
-		} catch (RuntimeException e) {
-			if (tx != null && tx.isActive())
-				tx.rollback();
-			throw e; // escribir en un log o mostrar un mensaje
-		} finally {
-			em.close();
-		}
-		return entity;
-	}
+
+	
 
 	@SuppressWarnings("unchecked")
 	public T recuperar(Serializable id) {
@@ -98,3 +112,4 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	}
 
 }
+
